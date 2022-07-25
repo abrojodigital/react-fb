@@ -1,10 +1,21 @@
+import { useContext } from 'react'
 import { Route, Routes } from 'react-router-dom'
+// rutas
 import Login from './routes/Login'
 import Home from './routes/Home'
+import Register from './routes/Register'
+// componentes
 import Navbar from './components/Navbar'
 import RequiereAuth from './components/RequiereAuth'
+// contexto
+import {UserContext} from './context/UserProvider'
 
 const App = () => {
+
+  const {user} = useContext(UserContext)
+  if(user === false){
+    return <p>Loading...</p>
+  }
 
   return (
     <>
@@ -17,6 +28,8 @@ const App = () => {
           </RequiereAuth>
         } />
         <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+
       </Routes>
     </>
   )
